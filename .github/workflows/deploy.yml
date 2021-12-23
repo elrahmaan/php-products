@@ -151,7 +151,7 @@ jobs:
             sudo firewall-cmd --reload
             sudo docker-compose up -d
             sudo mysql -u ${{secrets.DB_USER}} -p${{secrets.DB_PASS}} -h ${{env.MySQL_IP}} -e "CREATE DATABASE IF NOT EXISTS php-products;"
-            echo -e "DB_HOST=${{env.MySQL_IP}}\nDB_USERNAME=${{secrets.DB_USER}}\nDB_PASSWORD=${{secrets.DB_PASS}}" >> .env
+            # echo -e "DB_HOST=${{env.MySQL_IP}}\nDB_USERNAME=${{secrets.DB_USER}}\nDB_PASSWORD=${{secrets.DB_PASS}}" >> .env
             
-            sudo docker exec -i php-products bash -c '
-            file=`mysql -u ${{secrets.DB_USER}} -p${{secrets.DB_PASS}} -h ${{env.MySQL_IP}} php-products -e "SELECT COUNT(*) as count FROM users"  | cut -d \t -f 2`
+            # sudo docker exec -i php-products bash -c '
+            # file=`mysql -u ${{secrets.DB_USER}} -p${{secrets.DB_PASS}} -h ${{env.MySQL_IP}} php-products -e "SELECT COUNT(*) as count FROM users"  | cut -d \t -f 2`
