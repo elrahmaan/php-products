@@ -128,7 +128,7 @@ jobs:
           host: ${{ env.INSTANCE_IP }}
           username: opc
           key: ${{ secrets.OCI_KEY_FILE }}
-          source: "docker-compose.yml"
+          source: "docker-compose.yaml"
           target: "./"
 
 
