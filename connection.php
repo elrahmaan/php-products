@@ -1,6 +1,6 @@
 <?php
 //for MySQLi OOP
-$conn = new mysqli('localhost', 'root', '', 'storedb');
+$conn = new mysqli('10.0.0.74', 'admin', 'Uchiaatew17*', 'storedb');
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }

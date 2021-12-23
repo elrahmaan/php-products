@@ -44,41 +44,6 @@ jobs:
         run: |
           oci setup repair-file-permissions --file /home/runner/.oci/config
           oci setup repair-file-permissions --file /home/runner/.oci/oci_api_key.pem
-      # - name: 'Check Existing MySQL Database'
-      #   run: |
-      #     echo "MySQL_ID=$( \
-      #       oci mysql db-system list \
-      #       --lifecycle-state ACTIVE \
-      #       --compartment-id ${{secrets.VM_COMPARTMENT_OCID}} \
-      #       --display-name php-products \
-      #       --query 'data[0].id' \
-      #       --raw-output \
-      #       )" >> $GITHUB_ENV
-      # - name: 'Create MySQL Database'
-      #   if: ${{!env.MySQL_ID}}
-      #   run: |
-      #     echo "MySQL_ID=$( \
-      #       oci mysql db-system create \
-      #       --admin-password ${{ secrets.DB_PASS }} \
-      #       --admin-username ${{ secrets.DB_USER }} \
-      #       -c ${{secrets.VM_COMPARTMENT_OCID}} \
-      #       --availability-domain ${{secrets.VM_AVAILABILITY_DOMAIN}} \
-      #       --shape-name MySQL.VM.Standard.E3.1.8GB \
-      #       --display-name php-products \
-      #       --subnet-id ${{secrets.VM_SUBNET_OCID}} \
-      #       --wait-for-state SUCCEEDED \
-      #       --query 'data.resources[0].identifier' \
-      #       --raw-output \
-      #       --data-storage-size-in-gbs 50 \
-      #     )" >> $GITHUB_ENV
-      # - name: 'Get MySQL Database IP'
-      #   run: |
-      #     echo "MySQL_IP=$( \
-      #       oci mysql db-system get \
-      #       --db-system-id ${{env.MySQL_ID}} \
-      #       --query 'data."ip-address"' \
-      #       --raw-output \
-      #       )" >> $GITHUB_ENV
       - name: 'Check Existing Instance'
         run: |
           echo "INSTANCE_OCID=$( \
@@ -150,20 +115,3 @@ jobs:
             sudo firewall-cmd --zone=docker --add-service=http --permanent
             sudo firewall-cmd --reload
             sudo docker-compose up -d
-            # sudo docker exec -i php-products bash -c "chmod -R 777 /var/www/html/storage/"
-            # sudo docker exec -i php-products bash -c '
-            # if [ ! -f .env ]; then
-            # cp .env.example .env
-            # chmod 777 .env
-            # mysql -u ${{secrets.DB_USER}} -p${{secrets.DB_PASS}} -h ${{env.MySQL_IP}} -e "CREATE DATABASE IF NOT EXISTS php-products;"
-            # echo -e "DB_HOST=${{env.MySQL_IP}}\nDB_USERNAME=${{secrets.DB_USER}}\nDB_PASSWORD=${{secrets.DB_PASS}}" >> .env
-            # chmod -R 777 /var/www/html/storage/
-            # composer install
-            # php artisan key:generate
-            # php artisan migrate
-            # fi '
-            # sudo docker exec -i php-products bash -c '
-            # file=`mysql -u ${{secrets.DB_USER}} -p${{secrets.DB_PASS}} -h ${{env.MySQL_IP}} php-products -e "SELECT COUNT(*) as count FROM users"  | cut -d \t -f 2`
-            # if [ $file == "0" ]; then
-            # php artisan db:seed --class=UserSeeder
-            # fi '
