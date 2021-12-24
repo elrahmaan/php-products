@@ -6,7 +6,6 @@ if (isset($_POST['add'])) {
 	$name = $_POST['name'];
 	$category = $_POST['category'];
 	$price = $_POST['price'];
-	$image = $_POST['image'];
 	$stock = $_POST['stock'];
 
 
@@ -70,5 +69,3 @@ if (isset($_POST['add'])) {
 } else {
 	$_SESSION['error'] = 'Fill up add form first';
 }
-
-header('location: index.php');
