@@ -7,7 +7,6 @@ if (isset($_POST['edit'])) {
 	$name = $_POST['name'];
 	$category = $_POST['category'];
 	$price = $_POST['price'];
-	$image = $_POST['image'];
 	$stock = $_POST['stock'];
 
 	$nameFile = $_FILES['image']['name'];
@@ -72,5 +71,3 @@ if (isset($_POST['edit'])) {
 } else {
 	$_SESSION['error'] = 'Select member to edit first';
 }
-
-header('location: index.php');
