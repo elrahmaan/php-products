@@ -69,3 +69,7 @@ if (isset($_POST['add'])) {
 } else {
 	$_SESSION['error'] = 'Fill up add form first';
 }
+
+header('location: index.php');
+
+?>

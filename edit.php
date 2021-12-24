@@ -71,3 +71,6 @@ if (isset($_POST['edit'])) {
 } else {
 	$_SESSION['error'] = 'Select member to edit first';
 }
+header('location: index.php');
+
+?>
